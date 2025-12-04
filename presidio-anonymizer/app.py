@@ -125,7 +125,7 @@ class Server:
             responsee = OrderedDict([
                 ("text", responsec["text"]),
                 ("analyzer_results", responsec["analyzer_results"])
-            ]) 
+            ])
             responsed = json.dumps(responsee)
             return Response(responsed, mimetype='application/json')
         @self.app.route("/deanonymizers", methods=["GET"])
