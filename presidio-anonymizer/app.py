@@ -1,8 +1,8 @@
 """REST API server for anonymizer."""
 
+import json
 import logging
 import os
-import json
 from collections import OrderedDict
 from logging.config import fileConfig
 from pathlib import Path
@@ -94,7 +94,7 @@ class Server:
             return jsonify(self.anonymizer.get_anonymizers())
         @self.app.route("/genz-preview", methods=["GET"])
         def genz_preview():
-            """Return a genz anonymizer response"""
+            """Return a genz anonymizer response."""
             responsea = OrderedDict([
                 ("example","Call Emily at 577-988-1234"),
                 ("example output","Call GOAT at vibe check"),
@@ -102,6 +102,32 @@ class Server:
             ])
             responseb = json.dumps(responsea)
             return Response(responseb, mimetype='application/json')
+        @self.app.route("/genz", methods=["GET"])
+        def genz():
+            """Return a genz anonymization output."""
+            responsec = {
+                "text": "Please contact Emily Carter at 734-555-9284 if you have questions about the workshop registration.",
+                "analyzer_results": [
+                    {
+                        "start": 15,
+                        "end": 27,
+                        "score": 0.3,
+                        "entity_type": "PERSON"
+                    },
+                    {
+                        "start": 31,
+                        "end": 43,
+                        "score": 0.95,
+                        "entity_type": "PHONE_NUMBER"
+                    }
+                ]
+            }
+            responsee = OrderedDict([
+                ("text", responsec["text"]),
+                ("analyzer_results", responsec["analyzer_results"])
+            ]) 
+            responsed = json.dumps(responsee)
+            return Response(responsed, mimetype='application/json')
         @self.app.route("/deanonymizers", methods=["GET"])
         def deanonymizers():
             """Return a list of supported deanonymizers."""
