@@ -106,7 +106,8 @@ class Server:
         def genz():
             """Return a genz anonymization output."""
             responsec = {
-                "text": "Please contact Emily Carter at 734-555-9284 if you have questions about the workshop registration.",
+                "text": "Please contact Emily Carter at 734-555-9284 if you have"
+                "questions about the workshop registration.",
                 "analyzer_results": [
                     {
                         "start": 15,
